@@ -266,7 +266,25 @@ function create_post_type() {
         )
     );
 }
+
+add_action( 'init', 'event_init');
+function event_init() {
+    register_taxonomy(
+            'event',
+            'post',
+            array(
+                    'label' => __( 'Events' ),
+                    'rewrite' => array( 'slug' => 'events' ),
+                'capabilities' => array(
+                        'assign_terms' => 'edit_guides',
+                        'edit_terms' => 'publish_guides'
+                )
+            )
+    );
+}
+
 add_action( 'template_redirect', 'twentyseventeen_content_width', 0 );
+
 
 /**
  * Register custom fonts.

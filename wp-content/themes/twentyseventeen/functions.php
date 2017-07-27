@@ -270,13 +270,14 @@ function create_post_type() {
 add_action( 'init', 'event_init');
 function event_init() {
     register_taxonomy(
-            'event',
-            'post',
+            'event_category',
+            'tst_events',
             array(
-                    'label' => __( 'Events' ),
-                    'rewrite' => array( 'slug' => 'events' ),
-                'capabilities' => array(
-                        'assign_terms' => 'edit_guides',
+                    'label' => 'Event Category',
+                'query_var' => true,
+                'rewrite' => array(
+                        'slugs' => 'events',
+                        'assign_terms' => 'Events',
                         'edit_terms' => 'publish_guides'
                 )
             )
@@ -372,6 +373,7 @@ function twentyseventeen_widgets_init() {
 		'after_title'   => '</h2>',
 	) );
 }
+
 add_action( 'widgets_init', 'twentyseventeen_widgets_init' );
 
 /**

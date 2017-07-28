@@ -34,35 +34,56 @@ get_header(); ?>
 
 		<main id="main" class="site-main" role="main">
 
-
             <?php
+//            $term = get_terms( array(
+//                    'post_type' => 'tst_events',
+//                    'taxonomy' => 'event_category',
+//                    'hide_empty' => false,
+//            ) );
+//
+//             $list = new WP_Query( $term );
+            $terms = get_terms(  'event_category' );
+            echo '<div>';
+            foreach ( $terms as $term ) {
+                $link = get_term_link( $term );
+                if ( is_wp_error($link ) ) {
+                    continue;
+                }
+                echo '<p><a href="' . esc_url( $link ) . ' ">' . $term->name . '</a></p>';
+            }
+            echo '</div>';
 
-                $args = array(
-                        'post_type' => 'tst_events',
-                        'posts_per_page' => 5
-                );
-
-                $list = new WP_Query( $args );
-
-                if ($list->have_posts() ):
-                while ($list->have_posts() ) : $list->the_post();
             ?>
 
-                <h2 id="events-<?php the_ID(); ?>"><?php the_title(); ?></h2>
 
-                <?php
-                    the_excerpt();
-                    endwhile;
-                    the_post_navigation( array(
-                        'mid_size' => 3,
-                        'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'twentyseventeen' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Previous', 'twentyseventeen' ) . '</span> <span class="nav-title"><span class="nav-title-icon-wrapper">' . twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '</span>%title</span>',
-                        'next_text' => '<span class="screen-reader-text">' . __( 'Next Post', 'twentyseventeen' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Next', 'twentyseventeen' ) . '</span> <span class="nav-title">%title<span class="nav-title-icon-wrapper">' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ) . '</span></span>',
-                    ) );
+<!--            --><?php
+//
+//                $args = array(
+//                        'post_type' => 'tst_events',
+//                        'posts_per_page' => 5
+//                );
+//
+//                $list = new WP_Query( $args );
+//
+//                if ($list->have_posts() ):
+//                while ($list->have_posts() ) : $list->the_post();
+//            ?>
 
-                     wp_reset_postdata();
-
-                    endif;
-                ?>
+<!--                <h2 id="events---><?php //the_ID(); ?><!--">--><?php //the_title(); ?><!--</h2>-->
+<!---->
+<!--                --><?php
+//                    the_excerpt();
+//                    endwhile;
+//                    the_post_navigation( array(
+//                        'mid_size' => 3,
+//                        'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'twentyseventeen' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Previous', 'twentyseventeen' ) . '</span> <span class="nav-title"><span class="nav-title-icon-wrapper">' . twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '</span>%title</span>',
+//                        'next_text' => '<span class="screen-reader-text">' . __( 'Next Post', 'twentyseventeen' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Next', 'twentyseventeen' ) . '</span> <span class="nav-title">%title<span class="nav-title-icon-wrapper">' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ) . '</span></span>',
+//                    ) );
+//
+//                     wp_reset_postdata();
+//
+//                    endif;
+//                ?>
 
         </main><!-- #main -->
 
